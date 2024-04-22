@@ -2,12 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEditor;
+using System;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
 
     public  int activeMission = 1;
+
+    public bool isPlayerInMovement = false;
+
+    public JunctionController currentJunction;
+
+    public GameObject PlayerRef;
+
+
+    public GameData basic;
+
+    public enum missionType { Easy,Medium,Hard,Impossible };
     void Awake()
     {
         if (Instance != null)
@@ -17,12 +30,37 @@ public class DataManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadGameData();
     }
+
+    // GameData
+
+    [System.Serializable]
+    public class MissionData
+    {
+        public int missionid;
+        public string missionName;
+        public missionType missionType;
+    }
+    [System.Serializable]
+    public class GameData
+    {
+        public List<MissionData> missions;
+    }
+
+    // This will Implemented for storing the player data.
 
     [System.Serializable]
     public class SaveData
     {
         public int currentmission;
+    }
+
+    public void SaveGameData()
+    {
+        string json = JsonUtility.ToJson(basic);
+        File.WriteAllText(Application.persistentDataPath + "/GameData.json", json);
+        Debug.Log(json);
     }
     public void SaveProgress()
     {
@@ -31,18 +69,31 @@ public class DataManager : MonoBehaviour
         data.currentmission=activeMission;
 
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/playerprog.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/PlayerProgress.json", json);
     }
 
     public void LoadProgress()
     {
         // It will not work on WEBGL Build. For the we want to use the browser storage.
-        string path = Application.persistentDataPath + "/playerprog.json";
+        string path = Application.persistentDataPath + "/PlayerProgress.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             activeMission = data.currentmission;
+
+        }
+    }
+
+    public void LoadGameData()
+    {
+        // It will not work on WEBGL Build. For the we want to use the browser storage.
+        string path = Application.persistentDataPath + "/GameData.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            GameData data = JsonUtility.FromJson<GameData>(json);
+            basic = data;
 
         }
     }

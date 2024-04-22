@@ -20,35 +20,47 @@ public class GestureController : MonoBehaviour
         {
             endTouchPos= Input.GetTouch(0).position;
             // Identify the Type of Gesture.
-            TouchType();
+            if (DataManager.Instance.isPlayerInMovement == false)
+            {
+                TouchType();
+            }
+            
         }
     }
 
     void TouchType()
     {
-        diffX=endTouchPos.x-startTouchPos.x;
-        diffY=endTouchPos.y-startTouchPos.y;
-        if (diffX < diffY)
+        diffX=Mathf.Abs(startTouchPos.x-endTouchPos.x);
+        diffY=Mathf.Abs(startTouchPos.y-endTouchPos.y);
+
+        if (diffY > diffX)
         {
-            if(diffY > 0)
+            if (endTouchPos.y > startTouchPos.y)
             {
-                 // Up Gesture
+                // Up Gesture
+                DataManager.Instance.currentJunction.MovePlayerToNext("up");
             }
-            else
+            else if (endTouchPos.y < startTouchPos.y)
             {
                 // Down Gesture
+                Debug.Log("Down gestr");
+                DataManager.Instance.currentJunction.MovePlayerToNext("down");
             }
         }
-        else
+        else if (diffX > diffY)
         {
-            Debug.Log(diffX + "-----" + diffY);
-            if (diffX > 0)
+
+            if (endTouchPos.x < startTouchPos.x)
             {
                 // Right Gesture
+                Debug.Log("left");
+                DataManager.Instance.currentJunction.MovePlayerToNext("left");
             }
-            else
+            else if (endTouchPos.x > startTouchPos.x)
             {
+                Debug.Log("left");
                 // Left Gesture
+                DataManager.Instance.currentJunction.MovePlayerToNext("right");
             }
         }
     }
