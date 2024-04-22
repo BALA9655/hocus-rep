@@ -96,5 +96,12 @@ public class DataManager : MonoBehaviour
             basic = data;
 
         }
+        else
+        {
+            var jsonTextFile = Resources.Load<TextAsset>("GameData");
+            GameData data = JsonUtility.FromJson<GameData>(jsonTextFile.ToString());
+            basic = data;
+            File.WriteAllText(Application.persistentDataPath + "/PlayerProgress.json", jsonTextFile.ToString());
+        }
     }
 }

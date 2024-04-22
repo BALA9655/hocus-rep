@@ -37,7 +37,7 @@ public class JunctionController : MonoBehaviour
             DataManager.Instance.currentJunction = this;
             if(isEndPoint)
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(0);
             }
         }
     }
