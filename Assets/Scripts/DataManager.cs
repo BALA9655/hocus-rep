@@ -8,17 +8,11 @@ using System;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
-
     public  int activeMission = 1;
-
     public bool isPlayerInMovement = false;
-
     public JunctionController currentJunction;
-
     public GameObject PlayerRef;
-
-
-    public GameData basic;
+    public GameData gameData;
 
     public enum missionType { Easy,Medium,Hard,Impossible };
     void Awake()
@@ -55,13 +49,6 @@ public class DataManager : MonoBehaviour
     {
         public int currentmission;
     }
-
-    public void SaveGameData()
-    {
-        string json = JsonUtility.ToJson(basic);
-        File.WriteAllText(Application.persistentDataPath + "/GameData.json", json);
-        Debug.Log(json);
-    }
     public void SaveProgress()
     {
         // It will not work on WEBGL Build. For that we want to use the browser storage.
@@ -93,14 +80,14 @@ public class DataManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             GameData data = JsonUtility.FromJson<GameData>(json);
-            basic = data;
+            gameData = data;
 
         }
         else
         {
             var jsonTextFile = Resources.Load<TextAsset>("GameData");
             GameData data = JsonUtility.FromJson<GameData>(jsonTextFile.ToString());
-            basic = data;
+            gameData = data;
             File.WriteAllText(Application.persistentDataPath + "/PlayerProgress.json", jsonTextFile.ToString());
         }
     }

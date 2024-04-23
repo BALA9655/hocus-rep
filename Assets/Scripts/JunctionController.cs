@@ -27,6 +27,8 @@ public class JunctionController : MonoBehaviour
         if (isStartPoint)
         {
             DataManager.Instance.currentJunction = this;
+            MainUIHandler.Instance.DisableAllPath();
+            EnablePath();
         }
     }
 
@@ -37,8 +39,15 @@ public class JunctionController : MonoBehaviour
             DataManager.Instance.currentJunction = this;
             if(isEndPoint)
             {
-                SceneManager.LoadScene(0);
+                DataManager.Instance.isPlayerInMovement = false;
+                MainUIHandler.Instance.DisableAllPath();
+                DOTween.KillAll();
+                SceneManager.LoadScene(1);
             }
+            else
+            {
+                EnablePath();
+            } 
         }
     }
 
@@ -46,7 +55,7 @@ public class JunctionController : MonoBehaviour
     {
         if(other.tag=="Player")
         {
-
+            MainUIHandler.Instance.DisableAllPath();
         }
     }
 
@@ -102,5 +111,26 @@ public class JunctionController : MonoBehaviour
             });
         }
     }
+
+    void EnablePath()
+    {
+        if(isUp)
+        {
+            MainUIHandler.Instance.PathAnimation("up",true);
+        }
+        if(isDown)
+        {
+            MainUIHandler.Instance.PathAnimation("down",true);
+        }
+        if(isLeft)
+        {
+            MainUIHandler.Instance.PathAnimation("left",true);
+        }
+        if(isRight)
+        {
+            MainUIHandler.Instance.PathAnimation("right",true);
+        }
+    }
+
 
 }
