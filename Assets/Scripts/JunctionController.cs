@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class JunctionController : MonoBehaviour
 {
+    // Enables All the functionality for the Junction/Points.
     public bool isStartPoint;
     public bool isEndPoint;
 

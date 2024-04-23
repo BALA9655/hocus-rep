@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class MainUIHandler : MonoBehaviour
 {
+    //This Class Handle all the UI related function in the main Scene.
     public static MainUIHandler Instance;
     public Transform topHud;
     public Transform LevelUI;
@@ -30,12 +31,13 @@ public class MainUIHandler : MonoBehaviour
 
     void Start()
     {
+        // Intial mission selection screen loading.
         LevelUIDataProcess();
     }
     
-    // UI Open and Close Animation Function.
     public void UIAnimation(string uiName,bool status=false)
     {
+        // UI Open and Close Animation Function.
         switch(uiName)
         {
             case "tophud":
@@ -90,6 +92,7 @@ public class MainUIHandler : MonoBehaviour
         PathAnimation("left");
         PathAnimation("right");
     }
+    // Enable and Disable the Path direction availability for the current Junction.
     public void PathAnimation(string direction,bool status=false)
     {
         if(status)

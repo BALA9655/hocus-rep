@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GestureController : MonoBehaviour
 {
+    // Gesture Control Functionality for 4 axis using Old Input System.
     Vector2 startTouchPos;
     Vector2 endTouchPos;
     float diffX;

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LevelSelectorController : MonoBehaviour
 {
     Button select;
+    [Header("Data Container")]
     public int missionId;
     public string missionName;
     public DataManager.missionType missionType;
