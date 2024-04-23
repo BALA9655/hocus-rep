@@ -13,6 +13,7 @@ public class DataManager : MonoBehaviour
     public JunctionController currentJunction;
     public GameObject PlayerRef;
     public GameData gameData;
+    public List<GameObject> LevelMap = new List<GameObject>();
 
     public enum missionType { Easy,Medium,Hard,Impossible };
     void Awake()

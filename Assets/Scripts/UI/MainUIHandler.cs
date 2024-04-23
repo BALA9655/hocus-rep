@@ -12,9 +12,10 @@ public class MainUIHandler : MonoBehaviour
     public static MainUIHandler Instance;
     public Transform topHud;
     public Transform LevelUI;
-    public Transform LevelParent;
-    public GameObject LevelPrefab;
+    public Transform LevelUIParent;
+    public GameObject LevelUIPrefab;
     public TextMeshProUGUI levelText;
+    public GameObject LevelPrefabParent;
 
     [Header("Path Indicator")]
     public Transform up;
@@ -63,9 +64,9 @@ public class MainUIHandler : MonoBehaviour
 
     public void LevelUIDataProcess()
     {
-        if(LevelParent.childCount >0)
+        if(LevelUIParent.childCount >0)
         {
-            foreach(Transform child in LevelParent)
+            foreach(Transform child in LevelUIParent)
             {
                 Destroy(child.gameObject);
             }
@@ -76,7 +77,7 @@ public class MainUIHandler : MonoBehaviour
             var missions = DataManager.Instance.gameData.missions;
             foreach(var data in missions)
             {
-                GameObject go =Instantiate(LevelPrefab,LevelParent);
+                GameObject go =Instantiate(LevelUIPrefab,LevelUIParent);
                 go.GetComponent<LevelSelectorController>().LevelDataSetter(data.missionid,data.missionName,data.missionType);
             }
         }

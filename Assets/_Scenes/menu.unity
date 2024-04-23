@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 364938846}
   - component: {fileID: 364938848}
   - component: {fileID: 364938847}
-  - component: {fileID: 364938849}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -467,18 +466,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364938845}
   m_CullTransparentMesh: 1
---- !u!114 &364938849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364938845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43587038915a3224d90f9d5a1a5e0103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &655817173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,8 +1346,13 @@ MonoBehaviour:
   isPlayerInMovement: 0
   currentJunction: {fileID: 0}
   PlayerRef: {fileID: 0}
-  basic:
+  gameData:
     missions: []
+  LevelMap:
+  - {fileID: 9102000157612332895, guid: 7c0e20a3b9ce8a045825e05ab96efc20, type: 3}
+  - {fileID: 8110969960117805184, guid: 6c8644099db7bf34bb19ed63042efa05, type: 3}
+  - {fileID: 8110969960117805184, guid: 6c8644099db7bf34bb19ed63042efa05, type: 3}
+  - {fileID: 8110969960117805184, guid: 6c8644099db7bf34bb19ed63042efa05, type: 3}
 --- !u!4 &1727682600
 Transform:
   m_ObjectHideFlags: 0

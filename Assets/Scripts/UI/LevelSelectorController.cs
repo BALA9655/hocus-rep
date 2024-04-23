@@ -31,6 +31,24 @@ public class LevelSelectorController : MonoBehaviour
         MainUIHandler.Instance.UIAnimation("tophud",true);
         DataManager.Instance.activeMission=missionId;
         MainUIHandler.Instance.levelText.text="Level-"+ missionId.ToString()+" : "+missionName;
+        int levelState=0;
+        foreach(var level in DataManager.Instance.LevelMap)
+        {
+            levelState++;
+            if(levelState == missionId)
+            {
+                Debug.Log("Object");
+                if(MainUIHandler.Instance.LevelPrefabParent.transform.childCount >0)
+                {
+                    foreach(Transform t in MainUIHandler.Instance.LevelPrefabParent.transform)
+                    {
+                        Destroy(t.gameObject);
+                    }
+                }
+                Instantiate(level.transform,MainUIHandler.Instance.LevelPrefabParent.transform);
+            }
+        }
+
     }
-    
+
 }
